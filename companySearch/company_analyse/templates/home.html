@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>公司查询</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/semantic.min.css') }}">
+    <script src="{{ url_for('static', path='/jquery-3.5.1/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', path='/semantic.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#filterCompany").click(function () {
+                const Companyname = $("#Companyname").val();
+                window.location.href = "http://" + window.location.host + "/companyanlyse/company?Companyname=" + Companyname;
+            });
+            $("#filterCIty").click(function () {
+                const city = $("#city").val();
+                window.location.href = "http://" + window.location.host + "/companyanlyse/city?city=" + city;
+            });
+            $("#filterIndustry").click(function () {
+                const Industry = $("#Industry").val();
+                window.location.href = "http://" + window.location.host + "/companyanlyse/Industry?Indestryname=" + Industry;
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div class="ui container">
+    <h2></h2>
+    <h1 style="text-align: center">公司查询</h1>
+    <h2></h2>
+
+    <div style="display: flex; flex-direction: row;">
+        <div class="ui input">
+            <label for="city"></label><input id="Companyname" type="text" placeholder="公司" value="">
+        </div>
+        <button id="filterCompany" type="submit" class="ui button alert-secondary">查询</button>
+
+        <div class="ui input">
+            <label for="city"></label><input id="city" type="text" placeholder="城市" value="">
+        </div>
+        <button id="filterCIty" type="submit" class="ui button alert-secondary">查询</button>
+
+        <div class="ui input">
+            <label for="city"></label><input id="Industry" type="text" placeholder="行业" value="">
+        </div>
+        <button id="filterIndustry" type="submit" class="ui button alert-secondary">查询</button>
+    </div>
+
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>公司</th>
+            <th>城市</th>
+            <th>行业</th>
+            <th>注册资本</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for d in data %}
+        <tr>
+            <td>{{ d.name }}</td>
+            <td>{{ d.city.name }}</td>
+            <td>{{ d.bel_Industry }}</td>
+            <td>{{ d.registered_capital }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
